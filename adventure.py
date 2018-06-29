@@ -15,11 +15,16 @@ for i in range(height):  # loop over the rows
 player_i = 4
 player_j = 4
 inventory = []
+enemies = []
+
+
 # add 4 enemies in random locations
 for i in range(4):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+    enemies.append([random.randint(0, height - 1), random.randint(0, width - 1)])
+for x in enemies:
+    board[x[0]][x[1]] = '§'
+
+
 
 sword_i = random.randint(0, height - 1)
 sword_j = random.randint(0, width - 1)
@@ -67,6 +72,9 @@ while True:
         if action == 'attack' and "sword" in inventory:
             print('you\'ve slain the enemy')
             board[player_i][player_j] = ' '  # remove the enemy from the board
+        elif action == "attack":
+            print("you have been overpowered and slain.")
+            break
         else:
             print('you hestitated and were slain')
             break
