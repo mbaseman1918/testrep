@@ -15,42 +15,42 @@ def display_board(temp):
     for i in range(7):
         print("".join(temp[i]))
 
-def linefollow(x, y, direction1, direction2, currentboard, player, tracker):
-    checki = [x-1, x, x+1]
-    checkj = [y-1, y, y+1]
-    if tracker == 6:
-        print("{} WINS!".format(player[0]))
-    elif currentboard[checki[direction1]][checkj[direction2]] == player:
-        counter = tracker + 1
-        linefollow(checki[direction1], checkj[direction2], direction1, direction2, currentboard, player, counter)
+def lookaround(z, c):
+    checklist = []
+    checki = [z-1, z, z+1]
+    checkj = [c-1, c, c+1]
+    for i in checki:
+        for j in checkj:
+            checklist.append([i,j])
+    return checklist
+
+def continuefollow(follow, x, y, currentboard, player):
+    direction = lookaround(x, y)
+    if currentboard[direction[follow][0]][direction[follow][1]] == player:
+        return 1 + continuefollow(follow, direction[follow][0], direction[follow][1], currentboard, player)
     else:
-        pass
-def winner(i,j,currentboard, player):
-    checki = [i-1, i, i+1]
-    checkj = [j-1, j, j+1]
-    trackx = 0
-    if i == 5:
-        for x in checki[1:]:
-            tracky = 0
-            for y in checkj:
-                if currentboard[i][j] == currentboard[x][y]:
+        return 1
+
+
+def linefollow(x, y, currentboard, player):
+    direction = lookaround(x, y)
+    for value in range(9):
+        if value == 4:
+            pass
+        elif currentboard[direction[value][0]][direction[value][1]] == player:
+            win = 2 + continuefollow(value, direction[value][0], direction[value][1], currentboard, player)
+            if win >= 4:
+                return "{} WINS!".format(player[0])
+        else:
+            pass
+
+def winner(currentboard, player):
+        for x in range(7):
+            for y in range(8):
+                if currentboard[x][y] == "_ ":
                     continue
                 elif currentboard[x][y] == player:
-                    run = 1
-                    linefollow(x, y, trackx, tracky, currentboard, player, run)
-                tracky += 1
-            trackx += 1
-    else:
-        for x in checki:
-            tracky = 0
-            for y in checkj:
-                if currentboard[i][j] == currentboard[x][y]:
-                    continue
-                elif currentboard[x][y] == player:
-                    run = 1
-                    linefollow(x, y, trackx, tracky, currentboard, player, run)
-                tracky += 1
-            trackx += 1
+                    return linefollow(x, y, currentboard, player)
 
 def makemoves(movelist, gameboard):
     counter = 0
@@ -74,17 +74,18 @@ def makemoves(movelist, gameboard):
         counter += 1
     return gameboard
 
-def checkgame(game_dict):
-    directionlist = []
-    for p in game_dict:
-
-        for o in game_dict[p]:
-            if game_dict[p][o] != "_ ":
-                counter = 1
-
-
+# def checkgame(game_dict):
+#     directionlist = []
+#     trackx = 0
+#     for p in game_dict:
+#         tracky = 0
+#         for o in game_dict[p]:
+#             if game_dict[p][o] != "_ ":
+#                 counter = 1
 
 game = board()
 played = makemoves(getmoves(), game)
 display_board(played)
 print(played)
+print(winner(played, "O "))
+print(winner(played, "X "))
