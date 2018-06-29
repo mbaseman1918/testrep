@@ -15,14 +15,14 @@ for i in range(height):  # loop over the rows
 player_i = 4
 player_j = 4
 inventory = []
-enemies = []
+enemies = {}
 
 
 # add 4 enemies in random locations
 for i in range(4):
-    enemies.append([random.randint(0, height - 1), random.randint(0, width - 1)])
+    enemies[i] = [random.randint(0, height - 1), random.randint(0, width - 1)]
 for x in enemies:
-    board[x[0]][x[1]] = '§'
+    board[enemies[x][0]][enemies[x][1]] = '§'
 
 
 
@@ -64,6 +64,22 @@ while True:
         elif command.lower() in ['down', 'd']:
             player_i -= 1  # move down
 
+    # move enemies
+    killed = []
+    for x in enemies:
+        if board[enemies[x][0]][enemies[x][1]] != '§':
+            killed.append(x)
+            continue
+        choice = [-1, 0, 1]
+        move = random.choice(choice)
+        board[enemies[x][0]][enemies[x][1]] = ' '
+        enemies[x] = [enemies[x][0] + move, enemies[x][1] + move]
+        if (enemies[x][0] not in range(height)) or (enemies[x][1] not in range(width)):
+            enemies[x] = [enemies[x][0] - move, enemies[x][1] - move]
+    for x in killed:
+        del enemies[x]
+    for x in enemies:
+        board[enemies[x][0]][enemies[x][1]] = '§'
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':
@@ -94,3 +110,6 @@ while True:
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
+    if len(enemies) == 0:
+        print("You have slain all of the enemies!")
+        break
