@@ -32,16 +32,28 @@ class deck(object):
         self._cards = self._cards[position:] + self._cards[:position]
 
 class hand(object):
-    
+    def __init__(self, deck):
+        self.init_hand = [deck.deal(), deck.deal()]
 
+    def hit(self, deck):
+        self.init_hand.append(deck.deal())
 
+    def points(self):
+        pass
+        
 
 
 my_deck = deck()
-
+my_deck.shuffle()
 for i in my_deck._cards:
     print(i)
 print(len(my_deck._cards))
-my_deck.cut(17)
+my_deck.cut(28)
 for i in my_deck._cards:
     print(i)
+user_hand = hand(my_deck)
+user_hand.hit(my_deck)
+print(user_hand.init_hand)
+for i in my_deck._cards:
+    print(i)
+print(len(my_deck._cards))
