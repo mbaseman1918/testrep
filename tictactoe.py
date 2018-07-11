@@ -28,16 +28,19 @@ class board(object):
         return checklist
 
 
-    def continuefollow(self, i, x, y, currentboard, token):
+    def continuefollow(self, i, x, y, currentboard, counter, token):
         """
-        Cycles through i to check designated directions for a win
+        Iterates through i to check designated directions for a win
         """
         direction = self.lookaround(x, y)
+        print(direction)
         for j in i:
             try:
                 if currentboard[direction[j][0]][direction[j][1]] == token:
-                    if (1 + self.continuefollow([j], direction[j][0], direction[j][1], currentboard, token) > 1):
+                    counter += 1
+                    if (counter + self.continuefollow([j], direction[j][0], direction[j][1], currentboard, counter, token) > 5):
                         print(f"{token} WINS!")
+                        return 0
             except IndexError:
                 return 0
             else:
@@ -49,7 +52,7 @@ class board(object):
         """
         direction = self.lookaround(x, y)
         check = []
-        for i in range(10):
+        for i in range(9):
             if i == 4:
                 continue
             try:
@@ -61,13 +64,15 @@ class board(object):
 
     def win(self): # checks for a winner
         counterY = 0
+        score_list = []
         for y in self.full_board:
             counterX = 0
             for x in y:
-                if x in ["X", "O"]:
-                    self.continuefollow(self.follow(counterX, counterY, self.full_board, x), counterX, counterY, self.full_board, x)
+                if x == "X" or x == "O":
+                    self.continuefollow(self.follow(counterY, counterX, self.full_board, x), counterY, counterX, self.full_board, 1, x)
                 counterX += 1
             counterY += 1
+
 
 class player(object):
     def __init__(self, token, board):
@@ -78,15 +83,33 @@ class player(object):
         if self.board.full_board[x][y] not in ["X", "O"]:
             self.board.full_board[x][y] = self.token
 
-# while True:
-commands = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
-board1 = board()
-player1 = player("X", board1)
-player2 = player("O", board1)
-player1.move(commands[4][0], commands[4][1])
-player1.move(1,1)
-player1.move(1,2)
-print(board1)
-print(board1.win())
-print(board1.full_board)
-print(board1.lookaround(1,1))
+while True:
+    commands = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
+    board1 = board()
+    player1 = player("X", board1)
+    player2 = player("O", board1)
+    counter = 0
+    while True:
+        print()
+        print(board1)
+        print()
+        if counter%2 == 0:
+            position = int(input("Where would you like to place your token?"))
+            player1.move(commands[position][0],commands[position][1])
+        if counter%2 == 1:
+            position = int(input("Where would you like to place your token?"))
+            player2.move(commands[position][0],commands[position][1])
+        counter += 1
+        if board1.win() == "X WINS!":
+            print("You win!")
+            break
+
+
+
+    # player2.move(commands[1][0], commands[1][1])
+    # player2.move(1,1)
+    # player2.move(2,2)
+    # print(board1)
+    # board1.win()
+    # print(board1.full_board)
+    # print(board1.lookaround(1,1))
