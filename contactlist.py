@@ -7,7 +7,19 @@ class person(object):
 with open("c_list.csv", "r") as f:
     lines = f.read().split("\n")
     lines = lines[:-1]
+    headings = lines[0].split(",")
+    print(headings)
     print(lines)
     # book = f.read()
     # print(book)
-contacts = []
+contacts = {}
+for object in lines[1:]:
+    print(object)
+    index = object.split(",")[0]
+    counter = 0
+    contacts[index] = {}
+    for item in object.split(","):
+        print(item)
+        contacts[index][headings[counter]] = item
+        counter += 1
+print(contacts)
