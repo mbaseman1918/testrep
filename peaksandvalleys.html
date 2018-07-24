@@ -5,6 +5,34 @@
     <title></title>
   </head>
   <body>
+    <script>
+      function peaks(lst){
+          let peaks = []
+          for (let i=0;i<lst.length;++i){
+              if (i > 0 && i < (lst.length-1)){
+                  if (lst[i] > lst[i-1] && lst[i] > lst[i+1]){
+                      peaks.push(i)}}}
+          return peaks
+      }
 
+      function valleys(lst){
+          let peaks = []
+          for (let i=0;i<lst.length;++i){
+              if (i > 0 && i < (lst.length-1)){
+                  if (lst[i] < lst[i-1] && lst[i] < lst[i+1]){
+                      peaks.push(i)}}}
+          return peaks
+      }
+      function peaksandvalleys(lst){
+          let comb_list = peaks(lst).concat(valleys(lst))
+          // return comb_list
+          comb_list.sort((a,b)=>a-b)
+          return comb_list
+      }
+      data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
+      alert(peaks(data))
+      alert(valleys(data))
+      alert(peaksandvalleys(data))
+    </script>
   </body>
 </html>
