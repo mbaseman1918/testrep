@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Grading Lab</title>
+  </head>
+  <body>
+    <script>
+      let num_grade = prompt("What is your number grade? ");
+      while (num_grade<0 || num_grade>100){num_grade = prompt("What is your number grade? ");}
+      let mod = "not assigned"
+      if (num_grade == 100){
+          letter = "A"
+          mod = "+"}
+      else if (num_grade >= 90){
+          letter = "A"}
+      else if (num_grade >= 80){
+          letter = "B"}
+      else if (num_grade >= 70){
+          letter = "C"}
+      else if (num_grade >= 60){
+          letter = "D"}
+      else if (num_grade >= 50){
+          letter = "F"}
+      else if (num_grade >= 0){
+          letter = "F"
+          mod = "-"}
+      while (mod == "not assigned"){
+          if ((num_grade % 10) >= 7){
+              mod = "+"}
+          else if ((num_grade % 10) >= 4){
+              mod = ""}
+          else if ((num_grade % 10) >= 0){
+              mod = "-"}
+            }
+      alert("You got a " + letter + mod + ".");
+    </script>
+  </body>
+</html>
