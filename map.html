@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0,
+    width=device-width" />
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+    type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+    type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"
+    type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css"
+    href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+    <title>Map</title>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+  //Initialize the Platform object:
+  var platform = new H.service.Platform({
+    'app_id': '{YOUR_APP_ID} ',
+    'app_code': '{YOUR_APP_CODE} '
+  });
+
+  // Get the default map types from the Platform object:
+  var defaultLayers = platform.createDefaultLayers();
+
+  // Instantiate the map:
+  var map = new H.Map(
+    document.getElementById('mapContainer'),
+    defaultLayers.normal.map,
+    {
+      zoom: 10,
+      center: { lng: 13.4, lat: 52.51 }
+    });
+
+  // Create the default UI:
+  var ui = H.ui.UI.createDefault(map, defaultLayers);
+</script>
+  </body>
+</html>

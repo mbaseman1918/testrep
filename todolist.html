@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List</title>
+  </head>
+  <body>
+    <h1>To Do List</h1>
+    <div><input id="entry" type="text" name="entry"
+      placeholder="What task would you like to add?"><button id="createtask">Create Task</button></div>
+    <ul id="todolist"></ul>
+    <script>
+      class tasks {
+        constructor(container, todos=[]){
+          this.container = container
+          this.todos = todos
+          for (let i=0;i<todos.length; i++){
+            this.display(todos[i])
+          }
+        }
+        add(todo_task){
+          this.todos.push(todo_task)
+          this.display(todo_task)
+        }
+        remove(todo_task){
+          let idx = this.todos.indexOf(todo_task)
+          this.todos.splice(idx,1)
+        }
+        display(todo_task){
+          let task = document.createElement("li")
+          let remove = document.createElement("i")
+          let complete = document.createElement("i")
+          complete.classList.add("fa","fa-check")
+          remove.classList.add("fa","fa-times")
+          task.innerHTML = todo_task
+          task.appendChild(complete)
+          task.appendChild(remove)
+
+        }
+      }
+      // let entry = document.getElementById("entry")
+      // let todo = document.getElementById('todolist')
+      // let create = document.getElementById("createtask")
+      // create.onclick = function(){
+      //   let newtask = document.createElement("li");
+      //   todo.appendChild(newtask);
+      //   newtask.innerHTML = entry.value;
+      //   let remove = document.createElement("button");
+      //   remove.innerText = "remove";
+      //   let complete = document.createElement("button");
+      //   complete.innerText = "complete";
+      //   newtask.appendChild(remove);
+      //   newtask.appendChild(complete);
+      // }
+      // remove.addEventListener("click",function(){
+      //
+      // })
+    </script>
+  </body>
+</html>
