@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello Neo</title>
+
+    <style>
+
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: black;
+        color: green
+      }
+
+      pre {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: wrap;
+        width: 300px;
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <pre id="hacker"></pre>
+
+    <script>
+      let hacker = document.getElementById("hacker")
+      let hacker_string = `Hello Neo.  Follow the White Rabbit.  Knock, knock.
+struct group_info init_groups = { .usage = ATOMIC_INIT(2) };
+
+struct group_info *groups_alloc(int gidsetsize){
+
+    struct group_info *group_info;
+
+    int nblocks;
+
+    int i;
+
+
+
+    nblocks = (gidsetsize + NGROUPS_PER_BLOCK - 1) / NGROUPS_PER_BLOCK;
+
+    /* Make sure we always allocate at least one indirect block pointer */
+
+    nblocks = nblocks ? : 1;
+
+    group_info = kmalloc(sizeof(*group_info) + nblocks*sizeof(gid_t *), GFP_USER);
+
+    if (!group_info)
+
+        return NULL;
+
+    group_info->ngroups = gidsetsize;
+
+    group_info->nblocks = nblocks;
+
+    atomic_set(&group_info->usage, 1);
+
+
+
+    if (gidsetsize <= NGROUPS_SMALL)
+
+        group_info->blocks[0] = group_info->small_block;
+
+    else {
+
+        for (i = 0; i < nblocks; i++) {
+
+            gid_t *b;
+
+            b = (void *)__get_free_page(GFP_USER);
+
+            if (!b)
+
+                goto out_undo_partial_alloc;
+
+            group_info->blocks[i] = b;
+
+        }
+
+    }
+
+    return group_info;
+
+
+
+out_undo_partial_alloc:
+
+    while (--i >= 0) {
+
+        fr|`
+      let counter = 0
+      window.addEventListener("keypress", (evt) => {
+        hacker.innerHTML += hacker_string[counter]
+        counter++
+      })
+
+      if (hacker.width >= window.innerWidth) {
+        hacker.innerHTML += "\r"
+      }
+
+    </script>
+
+  </body>
+</html>
