@@ -3,11 +3,54 @@
   <head>
     <meta charset="utf-8">
     <title>To Do List</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <style>
+
+      body {
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin: 0px;
+      }
+
+      input#entry {
+        width: 50%;
+
+      }
+
+      ul{
+        border: 2px solid black;
+        padding: 0px;
+        list-style-type: none;
+      }
+
+      li {
+        background-color: blue;
+        color: white;
+        border: 2px solid black;
+
+      }
+
+      i{
+        padding: 2px;
+
+      }
+
+      li.completed{
+        text-decoration: line-through;
+      }
+
+    </style>
+
   </head>
   <body>
     <h1>To Do List</h1>
-    <div><input id="entry" type="text" name="entry"
-      placeholder="What task would you like to add?"><button id="createtask">Create Task</button></div>
+    <input id="entry" type="text" name="entry"
+      placeholder="What task would you like to add?">
     <ul id="todolist"></ul>
     <script>
       class tasks {
@@ -35,9 +78,45 @@
           task.innerHTML = todo_task
           task.appendChild(complete)
           task.appendChild(remove)
-
+          newToDoArea.value=""
+          this.container.appendChild(task)
+          complete.addEventListener("click", (evt) => {
+            let todo_task = evt.target.closest("li")
+            todo_task.classList.toggle("completed")
+          })
+          remove.addEventListener("click", (evt) => {
+            let todo_task = evt.target.closest("li")
+            todoList.remove(todo_task.innerText)
+            this.container.removeChild(todo_task)
+          })
         }
       }
+
+      let newToDoArea = document.getElementById("entry")
+      let todoListArea = document.getElementById("todolist")
+      let todoList = null
+
+      window.addEventListener("DOMContentLoaded", (evt) => {
+        let todos = JSON.parse(localStorage.getItem("todos"))
+        if (todos) {
+          todoList = new tasks(todoListArea,todos)
+        } else {
+          todoList = new tasks(todoListArea)
+        }
+      })
+
+      newToDoArea.addEventListener("keypress", (evt) => {
+        if (evt.key === "Enter") {
+          let todo_task = newToDoArea.value
+          if (todo_task) {todoList.add(todo_task)
+          }
+        }
+      })
+
+      window.addEventListener("beforeunload", (evt) => {
+        let todoListToJSON = JSON.stringify(todoList.todos)
+        localStorage.setItem("todos", todoListToJSON)
+      })
       // let entry = document.getElementById("entry")
       // let todo = document.getElementById('todolist')
       // let create = document.getElementById("createtask")
