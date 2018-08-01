@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Time</title>
+
+    <style>
+
+      body {
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+      div#stopwatch {
+        order: 1;
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <div id="UI">
+      <div id="time"></div>
+
+      <div id="stopwatch"></div>
+      <button id="start">Start</button>
+      <button id="lap">Lap</button>
+      <button id="stop">Stop</button>
+    </div>
+
+    <script>
+
+      function stopwatchfunc(){
+        let i = 0
+        let timer = setInterval(function(){
+          let stopwatch_time = new Date(0,0,0,0,0,i)
+          stopwatch.innerHTML ="<h1>Stopwatch</h1>" + stopwatch_time.getHours() + ":" + stopwatch_time.getMinutes() + ":" + stopwatch_time.getSeconds()
+          i++
+        },1000)
+      }
+
+      setInterval(function(){
+        time.innerHTML = "<h1>Time</h1>" + new Date()
+      },1000);
+
+      let mytimer = setInterval(,1000)
+
+      let start_time =
+
+      start.addEventListener("click", (evt) => {
+        stopwatchfunc()
+      })
+
+      stop.addEventListener("click", (evt) => {
+        clearInterval(timer);
+      })
+
+    </script>
+
+  </body>
+</html>

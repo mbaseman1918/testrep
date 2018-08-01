@@ -5,6 +5,23 @@
     <title>Random Redirector</title>
 
     <style>
+      body {
+        background-color: grey;
+        color: White
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+      }
+
+      iframe {
+        height: 600px;
+
+      }
 
     </style>
 
@@ -13,16 +30,25 @@
 
     <div>
 
-      <iframe id="myframe" src="http://class.pdxcodeguild.com/lab/random-redirector/"></iframe>
+      <iframe id="myframe" src="https://starcraft2.com/en-us/"></iframe>
+      <button id="redirect_btn">Show Random Website</button>
 
     </div>
 
     <script>
-      let websites = ["https://www.games-workshop.com/en-AU/Warhammer-40-000",
+      let websites = ["http://worstcats.tumblr.com/",
       "https://starcraft2.com/en-us/",
-      "https://store.steampowered.com/",
+      "https://en.wikipedia.org/wiki/Chicago",
       "http://www.frostpunkgame.com/"
     ]
+
+      // let redirect = document.getElementById("redirect_btn")
+      redirect_btn.addEventListener("click", (evt) => {
+        let index = Math.floor((Math.random()*websites.length))
+        let site = websites[index]
+        myframe.src = site
+      })
+
     </script>
 
   </body>
