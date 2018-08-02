@@ -13,6 +13,21 @@
         flex-direction: column;
 
       }
+      ul {
+        list-style: none;
+        padding: 2px;
+
+      }
+      li {
+        margin: 10px;
+        height: 30px;
+        width: 30px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      }
     </style>
 
   </head>
@@ -26,19 +41,42 @@
 
     <script>
       roll.addEventListener("click", (evt) => {
-      let reset = dicedisplay.childElementCount
-      let num_of_dice = quant_of_dice.value
-      if(reset>0){
-        for(let i=0;i<reset;i++){
-      dicedisplay.removeChild(document.getElementById("rolled"))
+        let reset = dicedisplay.childElementCount
+        let num_of_dice = quant_of_dice.value
+        if(reset>0){
+          for(let i=0;i<reset;i++){
+            dicedisplay.removeChild(document.getElementById("rolled"))
     }}
-      for (let i=0;i<num_of_dice;i++){
-        let dice = document.createElement("li")
-        dice.id = "rolled"
-        dice.innerHTML = Math.floor(Math.random()*6)+1
-        dicedisplay.appendChild(dice)
+        for (let i=0;i<num_of_dice;i++){
+          let dice = document.createElement("li")
+          dice.id = "rolled"
+          dice.innerHTML = Math.floor(Math.random()*6)+1
+          dice.addEventListener("click", (evt) => {
+            evt.target.closest("li").innerHTML = Math.floor(Math.random()*6)+1
+            if(dicedisplay.childElementCount>0){
+              let dice_sum_list = dicedisplay.childNodes
+              let sum_list = []
+              for (let i=0;i<dicedisplay.childNodes.length;i++){
+                sum_list.push(parseInt(dice_sum_list[i].innerHTML))
+              }
+              dice_total = sum_list.reduce((a,b) => a+b,0)
+              dicesum.innerHTML = dice_total
+          }
+          })
+          dicedisplay.appendChild(dice)
+      }
+        if(dicedisplay.childElementCount>0){
+          let dice_sum_list = dicedisplay.childNodes
+          let sum_list = []
+          for (let i=0;i<dicedisplay.childNodes.length;i++){
+            sum_list.push(parseInt(dice_sum_list[i].innerHTML))
+          }
+          dice_total = sum_list.reduce((a,b) => a+b,0)
+          dicesum.innerHTML = dice_total
       }
     })
+
+
     </script>
 
   </body>
