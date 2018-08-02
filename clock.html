@@ -30,35 +30,45 @@
       <div id="stopwatch"></div>
       <button id="start">Start</button>
       <button id="lap">Lap</button>
-      <button id="stop">Stop</button>
+      <button id="endtime">Stop</button>
+      <h3>Lap Times</h3>
+      <ol id="lap_time_list"></ol>
     </div>
 
     <script>
 
-      function stopwatchfunc(){
+      function timerfunc(){
         let i = 0
         let timer = setInterval(function(){
           let stopwatch_time = new Date(0,0,0,0,0,i)
           stopwatch.innerHTML ="<h1>Stopwatch</h1>" + stopwatch_time.getHours() + ":" + stopwatch_time.getMinutes() + ":" + stopwatch_time.getSeconds()
           i++
         },1000)
+        lap.addEventListener("click", (evt) => {
+          let timenow = new Date(0,0,0,0,0,i)
+          let laptime = timenow.getHours() + ":" + timenow.getMinutes() + ":" + timenow.getSeconds()
+          let newli = document.createElement("li")
+          newli.innerHTML = laptime
+          lap_time_list.appendChild(newli)
+        })
+        endtime.addEventListener("click", (evt) => {
+          clearInterval(timer)
+        })
+        return timer
       }
 
       setInterval(function(){
         time.innerHTML = "<h1>Time</h1>" + new Date()
       },1000);
 
-      let mytimer = setInterval(,1000)
-
-      let start_time =
+      // let mytimer = setInterval(,1000)
+      //
+      // let start_time =
 
       start.addEventListener("click", (evt) => {
-        stopwatchfunc()
+        timerfunc()
       })
 
-      stop.addEventListener("click", (evt) => {
-        clearInterval(timer);
-      })
 
     </script>
 
