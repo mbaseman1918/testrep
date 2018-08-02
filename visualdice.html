@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Roll Them Dice!</title>
+
+    <style>
+      body {
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Dice Roller</h1>
+    <input id="quant_of_dice" type="number" placeholder="How many dice?"><button id="roll">Roll</button>
+    <h2>Dice Display</h2>
+    <ul id="dicedisplay"></ul>
+    <h2>Dice Sum</h2>
+    <div id="dicesum"></div>
+
+    <script>
+      roll.addEventListener("click", (evt) => {
+      let reset = dicedisplay.childElementCount
+      let num_of_dice = quant_of_dice.value
+      if(reset>0){
+        for(let i=0;i<reset;i++){
+      dicedisplay.removeChild(document.getElementById("rolled"))
+    }}
+      for (let i=0;i<num_of_dice;i++){
+        let dice = document.createElement("li")
+        dice.id = "rolled"
+        dice.innerHTML = Math.floor(Math.random()*6)+1
+        dicedisplay.appendChild(dice)
+      }
+    })
+    </script>
+
+  </body>
+</html>
