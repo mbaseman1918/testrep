@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Quotes for Days</title>
+
+    <style>
+      body{
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Quote</h1>
+    <div id="quotedisplay"></div>
+    <h3>by</h3>
+    <div id="authordisplay"></div>
+    <script>
+      // let display = document.getElementById("quotedisplay")
+      // let quote = Get /https://favqs.com/api/qotd
+      // console.log(quote)
+      // let header = new Headers()
+      // header.append("Authorization", 'Token token="3356e46a7e2937bb527a46f52e24a9ff"')
+
+      quote = fetch("https://favqs.com/api/qotd",{
+        method:"GET"
+      }).then((response) => response.json())
+      .catch((error) => console.log(error))
+      .then((response) => {
+        quotedisplay.innerHTML = response.quote.body
+        authordisplay.innerHTML = response.quote.author
+      })
+      // console.log("http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en")
+      // let http = new XMLHttpRequest()
+      // let url = "http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en"
+      // http.open("GET", url)
+      // http.send()
+      // console.log(http.responseText)
+      // quote = http_get("http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en")
+      // console.log(quote)
+    </script>
+  </body>
+</html>
