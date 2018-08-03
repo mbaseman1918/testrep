@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Mole</title>
+
+    <style>
+      body {
+        background-color: grey;
+
+        }
+      div#row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      div.hole{
+        height: 30px;
+        width: 30px;
+        background-color: red;
+        margin: 10px;
+
+      }
+      div.mole{
+        height: 30px;
+        width: 30px;
+        background-color: black;
+        margin: 10px;
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <div id="display">
+      <div id="row">
+        <div class="hole" id="item 1"></div>
+        <div class="hole" id="item 2"></div>
+        <div class="hole" id="item 3"></div>
+        <div class="hole" id="item 4"></div>
+        <div class="hole" id="item 5"></div>
+      </div>
+      <div id="row">
+        <div class="hole" id="item 6"></div>
+        <div class="hole" id="item 7"></div>
+        <div class="hole" id="item 8"></div>
+        <div class="hole" id="item 9"></div>
+        <div class="hole" id="item 10"></div>
+      </div>
+      <div id="row">
+        <div class="hole" id="item 11"></div>
+        <div class="hole" id="item 12"></div>
+        <div class="hole" id="item 13"></div>
+        <div class="hole" id="item 14"></div>
+        <div class="hole" id="item 15"></div>
+      </div>
+      <div id="row">
+        <div class="hole" id="item 16"></div>
+        <div class="hole" id="item 17"></div>
+        <div class="hole" id="item 18"></div>
+        <div class="hole" id="item 19"></div>
+        <div class="hole" id="item 20"></div>
+      </div>
+
+    </div>
+
+    <script>
+      setInterval(function(){
+        let item_num = Math.floor((Math.random()*20)+1)
+        let item = "item {0}".replace("{" + 0 + "}",item_num)
+        console.log(item)
+        selector = document.getElementById(item)
+        selector.classList.remove("hole")
+        selector.classList.add("mole")
+        selector.addEventListener("click", (evt) => {
+          back_to_hole = evt.target.closest("div")
+          back_to_hole.classList.remove("mole")
+          back_to_hole.classList.add("hole")
+        })
+      },1000)
+    </script>
+
+  </body>
+</html>
