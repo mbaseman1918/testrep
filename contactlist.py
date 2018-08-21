@@ -32,8 +32,7 @@ class contactlist():
 
     def retrieve():
         name = input("What is the name of the person? ")
-        return f"\nThe following information is associated with {name}
-
+        return f"\nThe following information is associated with {name}"
 
     def update():
         name = input("What is the name of the person? ")
